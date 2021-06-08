@@ -2,7 +2,7 @@ import javafx.stage.Stage;
 
 public class Checker {
 
-    private int tmp = 0;
+    private int hit = 0;
     private final AlertService alert = new AlertService();
     private final Ranking ranking = new Ranking();
     private final MyButton[][] handle;
@@ -13,77 +13,155 @@ public class Checker {
         this.primaryStage = primaryStage;
     }
 
-    public boolean check(){
+    public boolean isGameOver(){
+        if(columnLoose() || rowLoose() || diagonallyLoose()){
+            endGame(0,1,0);
+            return true;
+        }else if(columnWin() || rowWin() || diagonallyWin()){
+            endGame(1, 1, 0);
+            return true;
+        }else if(draw()){
+            endGame(0,1,1);
+            return true;
+        }
+        return false;
+    }
 
-        if(columnWin())
-            return true;
-        else if(rowWin())
-            return true;
-        else if(diagonallyWin())
-            return true;
-        else return Draw();
-
+    public void endGame(int x, int y, int z){
+        ranking.saveRanking(x,y,z);
+        if(x == 1 && y == 1 && z == 0)
+            alert.playerWin(primaryStage);
+        if(x == 0 && y == 1 && z == 0)
+            alert.cpuWin(primaryStage);
+        if(x == 0 && y == 1 && z == 1)
+            alert.draw(primaryStage);
     }
 
     public boolean columnWin(){
 
-        if ("X".equals(handle[0][0].getText()) && "X".equals(handle[1][0].getText()) && "X".equals(handle[2][0].getText()) || "X".equals(handle[0][1].getText()) && "X".equals(handle[1][1].getText()) && "X".equals(handle[2][1].getText()) || "X".equals(handle[0][2].getText()) && "X".equals(handle[1][2].getText()) && "X".equals(handle[2][2].getText())) {
-            ranking.saveRanking(1,1,0);
-            alert.playerWin(primaryStage);
-            tmp = 0;
-            return true;
-        } else if ("O".equals(handle[0][0].getText()) && "O".equals(handle[1][0].getText()) && "O".equals(handle[2][0].getText()) || "O".equals(handle[0][1].getText()) && "O".equals(handle[1][1].getText()) && "O".equals(handle[2][1].getText()) || "O".equals(handle[0][2].getText()) && "O".equals(handle[1][2].getText()) && "O".equals(handle[2][2].getText())) {
-            ranking.saveRanking(0,1,0);
-            alert.cpuWin(primaryStage);
-            tmp = 0;
-            return true;
+        for(int i = 0; i < handle.length; i++){
+            hit = 0;
+            for(int j = 0; j < handle[i].length; j++){
+                if("X".equals(handle[j][i].getText())){
+                    hit++;
+                    if(hit == handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
         }
+        hit = 0;
+        return false;
+    }
+
+    public boolean columnLoose(){
+
+        for(int i = 0; i < handle.length; i++){
+            hit = 0;
+            for(int j = 0; j < handle[i].length; j++){
+                if("O".equals(handle[j][i].getText())){
+                    hit++;
+                    if(hit == handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
+        }
+        hit = 0;
         return false;
     }
 
     public boolean rowWin(){
 
-        if ("X".equals(handle[0][0].getText()) && "X".equals(handle[0][1].getText()) && "X".equals(handle[0][2].getText()) || "X".equals(handle[1][0].getText()) && "X".equals(handle[1][1].getText()) && "X".equals(handle[1][2].getText()) || "X".equals(handle[2][0].getText()) && "X".equals(handle[2][1].getText()) && "X".equals(handle[2][2].getText())) {
-            ranking.saveRanking(1,1,0);
-            alert.playerWin(primaryStage);
-            tmp = 0;
-            return true;
-        } else if ("O".equals(handle[0][0].getText()) && "O".equals(handle[0][1].getText()) && "O".equals(handle[0][2].getText()) || "O".equals(handle[1][0].getText()) && "O".equals(handle[1][1].getText()) && "O".equals(handle[1][2].getText()) || "O".equals(handle[2][0].getText()) && "O".equals(handle[2][1].getText()) && "O".equals(handle[2][2].getText())) {
-            ranking.saveRanking(0,1,0);
-            alert.cpuWin(primaryStage);
-            tmp = 0;
-            return true;
+
+        for(int i = 0; i < handle.length; i++){
+            hit = 0;
+            for(int j = 0; j < handle[i].length; j++){
+                if("X".equals(handle[i][j].getText())){
+                    hit++;
+                    if(hit == handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
         }
+        hit = 0;
+        return false;
+    }
+
+    public boolean rowLoose(){
+
+        for(int i = 0; i < handle.length; i++){
+            hit = 0;
+            for(int j = 0; j < handle[i].length; j++){
+                if("O".equals(handle[i][j].getText())){
+                    hit++;
+                    if(hit == handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
+        }
+        hit = 0;
         return false;
     }
 
     public boolean diagonallyWin(){
 
-        if ("X".equals(handle[0][0].getText()) && "X".equals(handle[1][1].getText()) && "X".equals(handle[2][2].getText()) || "X".equals(handle[0][2].getText()) && "X".equals(handle[1][1].getText()) && "X".equals(handle[2][0].getText())) {
-            ranking.saveRanking(1,1,0);
-            alert.playerWin(primaryStage);
-            tmp = 0;
-            return true;
-        } else if ("O".equals(handle[0][0].getText()) && "O".equals(handle[1][1].getText()) && "O".equals(handle[2][2].getText()) || "O".equals(handle[0][2].getText()) && "O".equals(handle[1][1].getText()) && "O".equals(handle[2][0].getText())) {
-            ranking.saveRanking(0,1,0);
-            alert.cpuWin(primaryStage);
-            tmp = 0;
-            return true;
+        for(int i = 0; i < handle.length; i++){
+            hit = 0;
+            for(int j = 0; j < handle[i].length; j++){
+                if("X".equals(handle[j][j].getText())){
+                    hit++;
+                    if(hit == handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
         }
-
+        hit = 0;
         return false;
 
     }
 
-    public boolean Draw(){
+    public boolean diagonallyLoose(){
 
-        tmp++;
-        if(tmp == 9) {
-            ranking.saveRanking(0,1,1);
-            alert.draw(primaryStage);
-            tmp = 0;
-            return true;
+        for(int i = 0; i < handle.length; i++){
+            hit = 0;
+            for(int j = 0; j < handle[i].length; j++){
+                if("O".equals(handle[j][j].getText())){
+                    hit++;
+                    if(hit == handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
         }
+        hit = 0;
+        return false;
+
+    }
+
+    public boolean draw(){
+
+        for(int i = 0; i < handle.length; i++){
+            for(int j = 0; j < handle[i].length; j++){
+                if("O".equals(handle[i][j].getText()) || "X".equals(handle[i][j].getText())){
+                    hit++;
+                    if(hit == handle.length * handle.length) {
+                        hit = 0;
+                        return true;
+                    }
+                }
+            }
+        }
+        hit = 0;
         return false;
     }
 

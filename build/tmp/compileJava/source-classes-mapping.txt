@@ -2,13 +2,13 @@ MyButton.java
  MyButton
 Ranking.java
  Ranking
-Checker.java
- Checker
-Easy.java
- Easy
-TicTacToe.java
- TicTacToe
 Computer.java
  Computer
+Easy.java
+ Easy
 AlertService.java
  AlertService
+Checker.java
+ Checker
+TicTacToe.java
+ TicTacToe

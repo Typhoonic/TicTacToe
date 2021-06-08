@@ -2,23 +2,23 @@ import java.util.Random;
 
 public class Easy implements Computer{
 
-        private final Random random = new Random();
+    private final Random random = new Random();
 
-        @Override
-        public void makeMove(MyButton[][] graphButtons) {
+    @Override
+    public void makeMove(MyButton[][] graphButtons) {
 
-            for(;;){
+        for(;;){
 
-                int x = random.nextInt(3);
-                int y = random.nextInt(3);
+            int x = random.nextInt(3);
+            int y = random.nextInt(3);
 
-                if(graphButtons[x][y].getText().equals("X") || graphButtons[x][y].getText().equals("O"))
-                    continue;
+            if("X".equals(graphButtons[x][y].getText()) || "O".equals(graphButtons[x][y].getText()))
+                continue;
 
-                graphButtons[x][y].setText("O");
-                break;
-
-            }
+            graphButtons[x][y].setText("O");
+            break;
 
         }
+
+    }
 }

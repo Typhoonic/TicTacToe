@@ -17,10 +17,9 @@ public class TicTacToe extends Application {
     }
 
     private final Image imageback = new Image("file:src/main/resources/Background.png");
-    MyButton[][] graphButtons = new MyButton[3][3];
-    Stage primaryStage;
-    Checker checker;
-    Easy cpu = new Easy();
+    private final MyButton[][] graphButtons = new MyButton[3][3];
+    private Checker checker;
+    private final Computer cpu = new Easy();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -28,7 +27,6 @@ public class TicTacToe extends Application {
 
         checker = new Checker(graphButtons,primaryStage);
         BorderPane root = new BorderPane();
-        this.primaryStage = primaryStage;
 
         //MenuImplementation
         Menu menu = new Menu("Menu");
@@ -65,19 +63,9 @@ public class TicTacToe extends Application {
             for(int j = 0; j < graphButtons[i].length; j++){
                 graphButtons[i][j] = new MyButton(i, j);
                 graphButtons[i][j].setOnMouseClicked(this::handleEvent);
+                grid.add(graphButtons[i][j], j+1, i);
             }
         }
-
-        //SetButtonsOnGrips
-        grid.add(graphButtons[0][0],1,0);
-        grid.add(graphButtons[1][0], 1, 1);
-        grid.add(graphButtons[2][0], 1, 2);
-        grid.add(graphButtons[0][1],2,0);
-        grid.add(graphButtons[1][1], 2, 1);
-        grid.add(graphButtons[2][1], 2, 2);
-        grid.add(graphButtons[0][2],3,0);
-        grid.add(graphButtons[1][2], 3, 1);
-        grid.add(graphButtons[2][2], 3, 2);
 
         root.setTop(menuBar);
         root.setCenter(grid);
@@ -101,10 +89,10 @@ public class TicTacToe extends Application {
         if (!graphButtons[x][y].getText().contains("O"))
             graphButtons[x][y].setText("X");
 
-        boolean isTrue = checker.check();
-        if(!isTrue)
+        boolean gameOver = checker.isGameOver();
+        if(!gameOver) {
             cpu.makeMove(graphButtons);
-        checker.check();
-
+            checker.isGameOver();
+        }
     }
 }

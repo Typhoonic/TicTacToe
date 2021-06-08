@@ -4,8 +4,8 @@ import javafx.scene.text.Font;
 
 public class MyButton extends Button {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public MyButton(int x, int y){
 

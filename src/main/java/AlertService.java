@@ -6,13 +6,31 @@ import javafx.stage.Stage;
 
 public class AlertService {
 
-    Ranking ranking = new Ranking();
-    TicTacToe tic = new TicTacToe();
+    private final Ranking ranking = new Ranking();
+    private final TicTacToe tic = new TicTacToe();
 
 
     public void playerWin(Stage primaryStage){
 
-        Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "You Win! Want you play again?\nYour ranking: " + ranking.showRanking(), ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You Win! Want you play again? Your ranking: " + ranking.showRanking(), ButtonType.YES, ButtonType.NO);
+        makeAlert(alert, primaryStage);
+    }
+
+    public void cpuWin(Stage primaryStage){
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You loose! Want you play again? Your ranking: " + ranking.showRanking(), ButtonType.YES, ButtonType.NO);
+        makeAlert(alert, primaryStage);
+    }
+
+    public void draw(Stage primaryStage){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "DRAW! Want you play again? Your ranking: " + ranking.showRanking(), ButtonType.YES, ButtonType.NO);
+        makeAlert(alert, primaryStage);
+    }
+
+    public void makeAlert(Alert alert, Stage primaryStage){
+
+        alert.setHeight(200);
+        alert.setWidth(200);
         alert.initOwner(primaryStage);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.showAndWait();
@@ -28,46 +46,7 @@ public class AlertService {
         if(alert.getResult() == ButtonType.NO){
             System.exit(0);
         }
+
     }
-
-    public void cpuWin(Stage primaryStage){
-
-        Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "You loose! Want you play again?\nYour ranking: " + ranking.showRanking(), ButtonType.YES, ButtonType.NO);
-        alert.initOwner(primaryStage);
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-
-        if(alert.getResult() == ButtonType.YES){
-            try {
-                tic.start(primaryStage);
-            }catch (Exception e){
-                System.out.println("Error:" + e);
-            }
-        }
-
-        if (alert.getResult() == ButtonType.NO){
-            System.exit(0);
-        }
-    }
-
-    public void draw(Stage primaryStage){
-
-        Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "DRAW! Want you play again?\nYour ranking: " + ranking.showRanking(), ButtonType.YES, ButtonType.NO);
-        alert.initOwner(primaryStage);
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-
-        if(alert.getResult() == ButtonType.YES){
-            try {
-                tic.start(primaryStage);
-            }catch (Exception e){
-                System.out.println("Error:" + e);
-            }
-        }
-
-        if (alert.getResult() == ButtonType.NO){
-            System.exit(0);
-        }
-    }
-
 }
+
