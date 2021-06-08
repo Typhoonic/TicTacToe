@@ -31,7 +31,6 @@ public class TicTacToe extends Application {
         checker = new Checker(graphButtons,primaryStage);
         BorderPane root = new BorderPane();
 
-        //MenuImplementation
         Menu menu = new Menu("Menu");
         MenuItem menuItem1 = new MenuItem("Restart");
         MenuItem menuItem2 = new MenuItem("Exit");
@@ -58,7 +57,6 @@ public class TicTacToe extends Application {
         grid.setBackground(background);
         grid.setAlignment(Pos.CENTER);
 
-        //SetGap
         grid.setHgap(20);
         grid.setVgap(20);
 
