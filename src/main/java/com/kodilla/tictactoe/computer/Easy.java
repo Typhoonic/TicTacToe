@@ -1,6 +1,10 @@
+package com.kodilla.tictactoe.computer;
+
+import com.kodilla.tictactoe.graphics.MyButton;
+
 import java.util.Random;
 
-public class Easy implements Computer{
+public class Easy implements Computer {
 
     private final Random random = new Random();
 

@@ -1,4 +1,7 @@
+package com.kodilla.tictactoe.graphics;
 
+import com.kodilla.tictactoe.TicTacToe;
+import com.kodilla.tictactoe.repository.Ranking;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
@@ -7,8 +10,7 @@ import javafx.stage.Stage;
 public class AlertService {
 
     private final Ranking ranking = new Ranking();
-    private final TicTacToe tic = new TicTacToe();
-
+    private final TicTacToe ticTacToe = new TicTacToe();
 
     public void playerWin(Stage primaryStage){
 
@@ -37,7 +39,7 @@ public class AlertService {
 
         if(alert.getResult() == ButtonType.YES){
             try {
-                tic.start(primaryStage);
+               ticTacToe.start(primaryStage);
             }catch (Exception e){
                 System.out.println("Error:" + e);
             }

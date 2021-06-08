@@ -1,14 +1,14 @@
-MyButton.java
- MyButton
-Ranking.java
- Ranking
-Computer.java
- Computer
-Easy.java
- Easy
-AlertService.java
- AlertService
-Checker.java
- Checker
-TicTacToe.java
- TicTacToe
+com/kodilla/tictactoe/computer/Easy.java
+ com.kodilla.tictactoe.computer.Easy
+com/kodilla/tictactoe/graphics/MyButton.java
+ com.kodilla.tictactoe.graphics.MyButton
+com/kodilla/tictactoe/condition/Checker.java
+ com.kodilla.tictactoe.condition.Checker
+com/kodilla/tictactoe/graphics/AlertService.java
+ com.kodilla.tictactoe.graphics.AlertService
+com/kodilla/tictactoe/computer/Computer.java
+ com.kodilla.tictactoe.computer.Computer
+com/kodilla/tictactoe/repository/Ranking.java
+ com.kodilla.tictactoe.repository.Ranking
+com/kodilla/tictactoe/TicTacToe.java
+ com.kodilla.tictactoe.TicTacToe

@@ -1,3 +1,8 @@
+package com.kodilla.tictactoe.condition;
+
+import com.kodilla.tictactoe.graphics.AlertService;
+import com.kodilla.tictactoe.graphics.MyButton;
+import com.kodilla.tictactoe.repository.Ranking;
 import javafx.stage.Stage;
 
 public class Checker {

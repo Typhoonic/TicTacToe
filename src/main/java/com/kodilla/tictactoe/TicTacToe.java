@@ -1,9 +1,13 @@
+package com.kodilla.tictactoe;
+
+import com.kodilla.tictactoe.computer.Computer;
+import com.kodilla.tictactoe.computer.Easy;
+import com.kodilla.tictactoe.condition.Checker;
+import com.kodilla.tictactoe.graphics.MyButton;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -20,11 +24,14 @@ public class TicTacToe extends Application {
     private final MyButton[][] graphButtons = new MyButton[3][3];
     private Checker checker;
     private final Computer cpu = new Easy();
+    private Stage primaryStage;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 
+        this.primaryStage = primaryStage;
         checker = new Checker(graphButtons,primaryStage);
         BorderPane root = new BorderPane();
 
@@ -95,4 +102,21 @@ public class TicTacToe extends Application {
             checker.isGameOver();
         }
     }
+
+    public void resultOfAlert(Alert alert){
+
+        if(alert.getResult() == ButtonType.YES){
+            try {
+                start(primaryStage);
+            }catch (Exception e){
+                System.out.println("Error:" + e);
+            }
+        }
+
+        if(alert.getResult() == ButtonType.NO){
+            System.exit(0);
+        }
+
+    }
+
 }
