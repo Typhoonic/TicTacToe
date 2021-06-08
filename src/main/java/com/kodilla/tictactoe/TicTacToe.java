@@ -24,14 +24,10 @@ public class TicTacToe extends Application {
     private final MyButton[][] graphButtons = new MyButton[3][3];
     private Checker checker;
     private final Computer cpu = new Easy();
-    private Stage primaryStage;
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-
-        this.primaryStage = primaryStage;
         checker = new Checker(graphButtons,primaryStage);
         BorderPane root = new BorderPane();
 
@@ -102,21 +98,4 @@ public class TicTacToe extends Application {
             checker.isGameOver();
         }
     }
-
-    public void resultOfAlert(Alert alert){
-
-        if(alert.getResult() == ButtonType.YES){
-            try {
-                start(primaryStage);
-            }catch (Exception e){
-                System.out.println("Error:" + e);
-            }
-        }
-
-        if(alert.getResult() == ButtonType.NO){
-            System.exit(0);
-        }
-
-    }
-
 }
