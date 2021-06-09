@@ -117,17 +117,29 @@ public class Checker {
 
     public boolean diagonallyWin() {
 
+        int k = 2;
+
         for (int i = 0; i < handle.length; i++) {
-            hit = 0;
-            for (int j = 0; j < handle[i].length; j++) {
-                if ("X".equals(handle[j][j].getText())) {
-                    hit++;
-                    if (hit == handle.length) {
-                        hit = 0;
-                        return true;
-                    }
+            if ("X".equals(handle[i][i].getText())) {
+                hit++;
+                if (hit == handle.length) {
+                    hit = 0;
+                    return true;
                 }
             }
+        }
+
+        hit = 0;
+
+        for (int j = 0; j < handle.length; j++) {
+            if ("X".equals(handle[j][k].getText())) {
+                hit++;
+                if (hit == handle.length) {
+                    hit = 0;
+                    return true;
+                }
+            }
+            k--;
         }
         hit = 0;
         return false;
